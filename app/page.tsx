@@ -1,8 +1,14 @@
-const Home = async ({ params, searchParams }: any) => {
-  console.log("params:", params);
-  console.log("searchParams: ", searchParams);
+import Button from "./button";
 
-  return <h1>Home</h1>;
+const Home = async () => {
+  return (
+    <div>
+      <h1>Home</h1>
+      <Button>
+        <p>Server Components</p>
+      </Button>
+    </div>
+  );
 };
 
 export default Home;
