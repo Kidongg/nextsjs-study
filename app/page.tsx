@@ -1,10 +1,18 @@
-const Home = async () => {
-  const data = await fetch("http://localhost:3000/api");
-  console.log("data: ", data);
-  const json = await data.json();
-  console.log("json: ", json);
+"use client";
 
-  return <h1>{JSON.stringify(json)}</h1>;
+import { send } from "./actions";
+
+const Home = () => {
+  // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   console.log("Submitted!");
+  // };
+
+  return (
+    <form action={send}>
+      <button>Send it</button>
+    </form>
+  );
 };
 
 export default Home;
