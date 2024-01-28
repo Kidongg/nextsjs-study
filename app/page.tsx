@@ -1,17 +1,31 @@
-"use client";
+import { unstable_noStore } from "next/cache";
+import { Suspense } from "react";
 
-import { send } from "./actions";
+const BlogPosts = async () => {
+  unstable_noStore();
 
-const Home = () => {
-  // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log("Submitted!");
-  // };
+  const res = await fetch("https://api.vercel.app/blog");
+  // console.log("res: ", res);
+  const posts = await res.json();
+  // console.log("posts: ", posts);
 
   return (
-    <form action={send}>
-      <button>Send it</button>
-    </form>
+    <ul>
+      {posts.map((post: any) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+};
+
+const Home = () => {
+  return (
+    <section>
+      <h1>My blog</h1>
+      <Suspense fallback={"Loading..."}>
+        <BlogPosts />
+      </Suspense>
+    </section>
   );
 };
 
